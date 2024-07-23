@@ -6,13 +6,13 @@ import os
 base_url = "https://v3.football.api-sports.io"
 headers = {
     "x-rapidapi-host": "v3.football.api-sports.io",
-    "x-rapidapi-key": "API-Key"  # Replace with your actual API key
+    "x-rapidapi-key": "bc6b867471810c9cb075388982a4a29f"  # Replace with your actual API key
 }
 
 # Step 1: Get leagues in Indonesia directly
-def get_indonesian_leagues():
+def get_leagues():
     url = f"{base_url}/leagues"
-    querystring = {"country": "Indonesia"}
+    querystring = {"id": "39"}
     try:
         response = requests.get(url, headers=headers, params=querystring)
         data = response.json()
@@ -37,7 +37,7 @@ def write_leagues_to_csv(leagues):
     if not os.path.exists(csv_folder):
         os.makedirs(csv_folder)
 
-    csv_file = os.path.join(csv_folder, 'indonesian_leagues.csv')
+    csv_file = os.path.join(csv_folder, 'premier_leagues.csv')
     csv_columns = ['league_id', 'league_name', 'country', 'season', 'logo']
 
     try:
@@ -70,10 +70,10 @@ def write_leagues_to_csv(leagues):
         print(f"Error writing to CSV file: {e}")
 
 # Get Indonesian leagues
-indonesian_leagues = get_indonesian_leagues()
+leagues = get_leagues()
 
 # Write leagues to CSV
-if indonesian_leagues:
-    write_leagues_to_csv(indonesian_leagues)
+if leagues:
+        write_leagues_to_csv(leagues)
 else:
-    print("No leagues found for Indonesia.")
+    print("No leagues found.")
